@@ -63,12 +63,12 @@ const type = JSON.parse(`{
 	"tshirt":{
 		"image": {
 			"front": {
-				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-dpn-min.png",
-				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-dpn-bg.png"
+				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-dpn-min.png",
+				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-dpn-bg.png"
 				},
 			"back": {
-				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-blk-min.png",
-				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-blk-bg.png"
+				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-blk-min.png",
+				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-blk-bg.png"
 				}
 			},
 		"region": {
@@ -81,12 +81,12 @@ const type = JSON.parse(`{
 	"tshirt-long-sleeve":{
 		"image": {
 			"front": {
-				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-long-dpn-min.png",
-				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-long-dpn-bg.png"
+				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-long-dpn-min.png",
+				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-long-dpn-bg.png"
 				},
 			"back": {
-				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-long-blk-min.png",
-				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/tshirt-long-blk-bg.png"
+				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-long-blk-min.png",
+				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/tshirt-long-blk-bg.png"
 				}
 			},
 		"region": {
@@ -99,12 +99,12 @@ const type = JSON.parse(`{
 	"hoodie":{
 		"image": {
 			"front": {
-				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/hoodie-dpn-min.png",
-				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/hoodie-dpn-bg.png"
+				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/hoodie-dpn-min.png",
+				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/hoodie-dpn-bg.png"
 				},
 			"back": {
-				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/hoodie-blk-min.png",
-				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.2/image/hoodie-blk-bg.png"
+				"top": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/hoodie-blk-min.png",
+				"bottom": "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.0/image/hoodie-blk-bg.png"
 				}
 			},
 		"region": {
