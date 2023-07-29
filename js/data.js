@@ -1,10 +1,10 @@
 const link = {
 	region: {
 		www: {
-			production: `${hostname}/p/production.html`,
-			cart: `${hostname}/p/cart.html`,
-			order: `${hostname}/p/order.html`,
-			contact: `${hostname}/p/contact.html`,
+			production: `production.html`,
+			cart: `cart.html`,
+			order: `order.html`,
+			contact: `contact.html`,
 			}
 		}
 	}

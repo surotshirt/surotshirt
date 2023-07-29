@@ -820,13 +820,6 @@ let Index = (function (){
 									${price.region[$this.region].currency(type[v.type].region[$this.region].price+size["extra-small"].region[$this.region].price+(v.print*print.region[$this.region].price))} - ${price.region[$this.region].currency(type[v.type].region[$this.region].price+size["3-extra-large"].region[$this.region].price+(v.print*print.region[$this.region].price))}
 								</span>
 							</div>
-
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
