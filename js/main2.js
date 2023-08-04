@@ -1,4 +1,6 @@
 let $dom = {
+	title: $('title'),
+	metaDescription: $("meta[name='description']"),
 	selectType: $('.selectType'),
 	selectColor: $('.selectColor'),
 	selectColorList: $('.selectColorList'),
@@ -34,7 +36,8 @@ let $dom = {
 	modalImgA: $('.modalImgA'),
 	aProduct: $('.aProduct'),
 	editor: $("#custom-tshirt-editor"),
-	submit: $(".submit")
+	submit: $(".submit"),
+	buttonShare: $(".buttonShare")
 	}
 let printsize = (data)=>{
 	let dimension1 = {
@@ -112,16 +115,39 @@ let printsize = (data)=>{
 					return res;
 	}
 
+let modal = function (data){
+	$dom.modalImg.eq(0).attr("src", data.image[0]);
+				$dom.modalImgA.eq(0).attr("href", data.image[0]);
+				$dom.modalImg.eq(1).attr("src", data.image[1]);
+				$dom.modalImgA.eq(1).attr("href", data.image[1]);
+				$dom.htmlName.html(data.name);
+				$dom.htmlPrice.html(data.price);
+				$dom.htmlDescriptionType.html(data.description);
+				$dom.aProduct.attr("href", data.link);
+				$dom.htmlModal.addClass("show-modal1");
+	}
+
 let Initialize = (function (){
 	function Initialize(){
+		this.init();
 		this.selectType();
 		this.selectSize();
 		this.selectColor();
 		this.selectCountry();
 		this.selectMarketplace();
+		
 		}
 	Initialize.prototype = {
 		region: $("html").attr("data-region"),
+		init: function (){
+			let cart = {};
+			cart = (window.localStorage.getItem(`cart@${window.location.hostname}`) != null)?JSON.parse(window.localStorage.getItem(`cart@${window.location.hostname}`)):cart;
+			$(".icon-header-noti").attr("data-notify", Object.keys(cart).length);
+			
+			let orders = {};
+			orders = (window.localStorage.getItem(`orders@${window.location.hostname}`) != null)?JSON.parse(window.localStorage.getItem(`orders@${window.location.hostname}`)):cart;
+			$(".label1").attr("data-label1", Object.keys(orders).length);
+			},
 		capitalize: function (str){
 			return str.charAt(0).toUpperCase() + str.slice(1);
 			},
@@ -281,6 +307,12 @@ let Production = (function (){
 			this.reedit = (par.get("reedit") != null)?((par.get("reedit") == "true")?true:false):this.reedit;
 			this.id = (par.get("id") != null)?par.get("id"):this.id;
 			this.data = (product[this.id] != null)?product[this.id]:this.data;
+			$dom.title.html(this.data.name);
+			$dom.metaDescription.attr("content", type[this.data.type].region[this.region].description);
+			
+			
+			this.data.name = "";
+			this.data.keyword = "";
 			this.cart = (window.localStorage.getItem(`cart@${window.location.hostname}`) != null)?JSON.parse(window.localStorage.getItem(`cart@${window.location.hostname}`)):this.cart;
 			if(this.reedit){
 				this.data = this.cart[this.id];
@@ -292,9 +324,11 @@ let Production = (function (){
 				  }}, true);
 				});
 			
+			
 			},
 		input: function (){
 			let $this = this;
+			console.log(link.region[$this.region].cart);
 			$('.selectType').on("change", function (){
 				$this.data.type = this.value;
 				$this.editor.customTShirt.settings.data.canvas[0].image = type[this.value]["image"]["front"];
@@ -354,8 +388,31 @@ let Production = (function (){
 					clearInterval(loader);
 					swal($this.data.name, "is added to cart !", "success");
 					$(this).html("Add to cart").removeAttr("disabled");
+					
+					console.log(link.region[$this.region].cart);
+					window.location.assign(link.region[$this.region].cart);
+   
 					});
 				});
+				$dom.buttonShare.on("click", function (){
+					const shareData = {
+						title: $dom.title.html(),
+						text: $dom.metaDescription.attr("content"),
+						url: window.location.href,
+						};
+console.log(shareData);
+					switch (this.value){
+						case "facebook": 
+							window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+							break;
+						case "twitter": 
+							window.open(`http://www.twitter.com/share?url=${encodeURIComponent(window.location.href)}`, '_blank');
+							break;
+						case "share": 
+							navigator.share(shareData);
+							break;
+						}
+					});
 			},
 		save: function (callback){
 			jsonbin.create(this.editor.customTShirt.settings.data, (binid)=>{
@@ -387,6 +444,7 @@ let Production = (function (){
 			$('.inputName').val(this.data.name);
 			$('.inputKeyword').val(this.data.keyword);
 			$('.inputQuantity').val(this.data.quantity);
+			
 			}
 		}
 	return Production;
@@ -420,18 +478,17 @@ let Cart = (function (){
 			},
 		input: function (){
 			let $this = this;
+			console.log(link.region[$this.region].order);
 			$(document).on("click", ".showModal", function (){
 				let id = $(this).attr("data-id");
 				console.log(price.region[$this.region].currency(type[$this.cart[id].type].region[$this.region].price+size[$this.cart[id].size].region[$this.region].price+($this.cart[id].print*print.region[$this.region].price)));
-				$dom.modalImg.eq(0).attr("src", $this.cart[id].image[0]);
-				$dom.modalImgA.eq(0).attr("href", $this.cart[id].image[0]);
-				$dom.modalImg.eq(1).attr("src", $this.cart[id].image[1]);
-				$dom.modalImgA.eq(1).attr("href", $this.cart[id].image[1]);
-				$dom.htmlName.html($this.cart[id].name);
-				$dom.htmlPrice.html(price.region[$this.region].currency(type[$this.cart[id].type].region[$this.region].price+size[$this.cart[id].size].region[$this.region].price+($this.cart[id].print*print.region[$this.region].price)));
-				$dom.htmlDescriptionType.html(type[$this.cart[id].type].region[$this.region]. description);
-				$dom.aProduct.attr("href", `${link.region[$this.region].production}?id=${id}&reedit=true`);
-				$dom.htmlModal.addClass("show-modal1");
+				modal({
+					name: $this.cart[id].name,
+					image: [$this.cart[id].image[0], $this.cart[id].image[1]],
+					price: price.region[$this.region].currency(type[$this.cart[id].type].region[$this.region].price+size[$this.cart[id].size].region[$this.region].price+($this.cart[id].print*print.region[$this.region].price)),
+					description: type[$this.cart[id].type].region[$this.region]. description,
+					link: `${link.region[$this.region].production}?id=${id}&reedit=true`
+					});
 				});
 			$(document).on("click", ".deleteQuantity", function (){
 				let id = $(this).attr("data-id");
@@ -501,6 +558,7 @@ let Cart = (function (){
 					clearInterval(loader);
 					swal($this.order.name, "is added to orders !", "success");
 					$(this).html("Proceed to Checkout").removeAttr("disabled");
+					window.location.assign(link.region[$this.region].order);
 					}, $this.order.name, "648095bb8e4aa6225eaaa19f");
 				console.log($this.order);
 				});
@@ -551,7 +609,7 @@ let Order = (function (){
 		}
 	Order.prototype = {
 		region: $("html").attr("data-region"),
-		id: "64c11931b89b1e2299c57516",
+		id: "",
 		order: {},
 		orders: {},
 		init: function (){
@@ -575,15 +633,14 @@ let Order = (function (){
 			$(document).on("click", ".showModal", function (){
 				let id = $(this).attr("data-id");
 				console.log(price.region[$this.region].currency(type[$this.order.cart[id].type].region[$this.region].price+size[$this.order.cart[id].size].region[$this.region].price+($this.order.cart[id].print*print.region[$this.region].price)));
-				$dom.modalImg.eq(0).attr("src", $this.order.cart[id].image[0]);
-				$dom.modalImgA.eq(0).attr("href", $this.order.cart[id].image[0]);
-				$dom.modalImg.eq(1).attr("src", $this.order.cart[id].image[1]);
-				$dom.modalImgA.eq(1).attr("href", $this.order.cart[id].image[1]);
-				$dom.htmlName.html($this.order.cart[id].name);
-				$dom.htmlPrice.html(price.region[$this.region].currency(type[$this.order.cart[id].type].region[$this.region].price+size[$this.order.cart[id].size].region[$this.region].price+($this.order.cart[id].print*print.region[$this.region].price)));
-				$dom.htmlDescriptionType.html(type[$this.order.cart[id].type].region[$this.region]. description);
-				$dom.aProduct.attr("href", `${link.region[$this.region].production}?id=${id}&reedit=true`);
-				$dom.htmlModal.addClass("show-modal1");
+				modal({
+					name: $this.order.cart[id].name,
+					image: [$this.order.cart[id].image[0], $this.order.cart[id].image[1]],
+					price: price.region[$this.region].currency(type[$this.order.cart[id].type].region[$this.region].price+size[$this.order.cart[id].size].region[$this.region].price+($this.order.cart[id].print*print.region[$this.region].price)),
+					description: type[$this.order.cart[id].type].region[$this.region]. description,
+					link: `${link.region[$this.region].production}?id=${id}&reedit=true`
+					});
+				
 				});
 			},
 		render1: function (){
@@ -592,7 +649,7 @@ let Order = (function (){
 			$.each(this.orders, (i, v)=>{
 				list = `<tr class="table_row">
 									
-									<td class="column-2 p-l-20"><a href="">${i}</a></td>
+									<td class="column-2 p-l-20"><a href="${link.region[this.region].order}?id=${i}">${i}</a></td>
 									<td class="column-3">${v.name}</td>
 									<td class="column-3">${v.email}</td>
 									<td class="column-4">
@@ -680,6 +737,7 @@ let Index = (function (){
 			},
 		pagelast: 0,
 		filter: {
+			type: "all",
 			sort: "newness",
 			color: "all",
 			search: "",
@@ -691,9 +749,9 @@ let Index = (function (){
 				this.data.push(v);
 				});
 			console.log(this.data);
-			$dom.htmlTypeList.append(`<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" value="all">All Products</button>`);
+			$dom.htmlTypeList.append(`<button class="buttonType stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" value="all">All Products</button>`);
 			$.each(type, (i, v)=>{
-				$dom.htmlTypeList.append(`<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="${i}">${String(initialize.capitalize(i)).replace(/\-/g, " ")}</button>`);
+				$dom.htmlTypeList.append(`<button class="buttonType stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="${i}">${String(initialize.capitalize(i)).replace(/\-/g, " ")}</button>`);
 				});
 			let j = 0;
 			$dom.htmlColorList.eq(0).append(`<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"><i class="zmdi zmdi-circle"></i></span><button class="buttonColor filter-link stext-106 trans-04 filter-link-active" value="all">All color</button></li>`);
@@ -712,6 +770,17 @@ let Index = (function (){
 			},
 		pagenation: function (page = 0){
 			this.datatemp = JSON.parse(`${JSON.stringify(this.data)}`);
+			if(this.filter.type != "all"){
+				let arr = [];
+				$.each(this.datatemp, (i, v)=>{
+					if(v.type == this.filter.type){
+						arr.push(v);
+						}
+					});
+				this.datatemp = JSON.parse(`${JSON.stringify(arr)}`);
+				}
+			
+			
 			switch (this.filter.sort){
 				case "oldness" :
 					this.datatemp.reverse();
@@ -772,19 +841,25 @@ let Index = (function (){
 				$this.pagenation(0);
 				$this.render();
 				});
+			$(".buttonType").on("click", function (){
+				$(".buttonType").removeClass("how-active1");
+				$(this).addClass("how-active1");
+				console.log(this.value);
+				$this.filter.type = this.value;
+				$this.pagenation(0);
+				$this.render();
+				});
 			$(document).on("click", ".quickView", function (){
 				let id = $(this).attr("data-id");
 				let v = product [id];
 				// console.log(price.region[$this.region].currency(type[$this.order.cart[id].type].region[$this.region].price+size[$this.order.cart[id].size].region[$this.region].price+($this.order.cart[id].print*print.region[$this.region].price)));
-				$dom.modalImg.eq(0).attr("src", v.image[0]);
-				$dom.modalImgA.eq(0).attr("href", v.image[0]);
-				$dom.modalImg.eq(1).attr("src", v.image[1]);
-				$dom.modalImgA.eq(1).attr("href", v.image[1]);
-				$dom.htmlName.html(v.name);
-				$dom.htmlPrice.html(`${price.region[$this.region].currency(type[v.type].region[$this.region].price+size["extra-small"].region[$this.region].price+(v.print*print.region[$this.region].price))} - ${price.region[$this.region].currency(type[v.type].region[$this.region].price+size["3-extra-large"].region[$this.region].price+(v.print*print.region[$this.region].price))}`);
-				$dom.htmlDescriptionType.html(type[v.type].region[$this.region].description);
-				$dom.aProduct.attr("href", `${link.region[$this.region].production}?id=${id}`);
-				$dom.htmlModal.addClass("show-modal1");
+				modal({
+					name: v.name,
+					image: [v.image[0], v.image[1]],
+					price: `${price.region[$this.region].currency(type[v.type].region[$this.region].price+size["extra-small"].region[$this.region].price+(v.print*print.region[$this.region].price))} - ${price.region[$this.region].currency(type[v.type].region[$this.region].price+size["3-extra-large"].region[$this.region].price+(v.print*print.region[$this.region].price))}`,
+					description: type[v.type].region[$this.region].description,
+					link: `${link.region[$this.region].production}?id=${id}`
+					});
 				});
 			$(".inputSearch").on("input", function (){
 				clearTimeout($this.si);
@@ -812,7 +887,7 @@ let Index = (function (){
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="${link.region[this.region].production}?id=${v.id}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									${v.name}
 								</a>
 
