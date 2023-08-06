@@ -145,7 +145,7 @@ let Initialize = (function (){
 			$(".icon-header-noti").attr("data-notify", Object.keys(cart).length);
 			
 			let orders = {};
-			orders = (window.localStorage.getItem(`orders@${window.location.hostname}`) != null)?JSON.parse(window.localStorage.getItem(`orders@${window.location.hostname}`)):cart;
+			orders = (window.localStorage.getItem(`orders@${window.location.hostname}`) != null)?JSON.parse(window.localStorage.getItem(`orders@${window.location.hostname}`)):orders;
 			$(".label1").attr("data-label1", Object.keys(orders).length);
 			},
 		capitalize: function (str){

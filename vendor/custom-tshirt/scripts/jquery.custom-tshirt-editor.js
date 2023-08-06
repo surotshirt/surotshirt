@@ -3,13 +3,13 @@
 		let text = {
 						type: "text",
 						top: 300, // 0-1000
-						left: 580, //0-1000
+						left: 340, //0-1000
 						transform: {
 							rotateX: 0, // -90 - 90
 							rotateY: 0 // -90 - 90
 							},
 						child: {
-							html: "Hello world",
+							html: "Your text",
 							borderBottom: false,
 							textAlign: `center`,
 							letterSpacing: 0, //-20-200
@@ -18,22 +18,22 @@
 							font: {
 								size: 50, // 0-500
 								source: `https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap`,
-								family: `Abril Fatface`,
-								weight: "bold",
+								family: `Roboto`,
+								weight: "normal",
 								style: "none"
 								},
 							
 							backgroundImage: {
-								type: 2,// 0 - 4
+								type: 1,// 0 - 4
 								url: "",
-								color: ["#ff0000", "#0000ff"],
+								color: ["#000000"],
 								natural: {
 									exist: true,
-									width: 1280,
-									height: 1920,
+									width: 100,
+									height: 100,
 									},
 								linear: {
-									pos: 20, // -180 - 180
+									pos: 0, // -180 - 180
 									},
 								radial: {
 									posX: 0, // 0 - 100
@@ -55,11 +55,11 @@
 								main: "",
 								color: {
 									exist: false,
-									main: "#ff0000"
+									main: "#000000"
 									},
 								stroke: {
 									width: 25, // 0-35
-									color: "#ff0000"
+									color: "#000000"
 									},
 								outline: {
 									width: 0, // 0-35
@@ -72,7 +72,7 @@
 									},
 								shadow: {
 									blur: 0, // 0-15
-									color: "#ff0000",
+									color: "#000000",
 									posX: 0, // -350-350
 									posY: 0 // -350-350
 									},
@@ -98,12 +98,12 @@
 							opacity: 1, // 0-1 point 0.x
 							backgroundImage: {
 								type: 0,// 0 - 4
-								url: "https://media.istockphoto.com/id/1205141343/id/vektor/pola-mulus-dengan-ornamen-geometris-simetris-latar-belakang-abstrak-yang-cerah.jpg?s=612x612&w=0&k=20&c=6C4vTOxu2RBtw5zQ78JFltOyWM-WmhHRixP7S3e7OFs=",
+								url: "https://cdn.jsdelivr.net/gh/surotshirt/surotshirt@v1.0.6/images/icons/logo-st.png",
 								color: ["#ff0000", "#0000ff"],
 								natural: {
 									exist: true,
-									width: 1280,
-									height: 1920,
+									width: 500,
+									height: 500,
 									},
 								linear: {
 									pos: 20, // -180 - 180
@@ -124,11 +124,11 @@
 								main: "",
 								color: {
 									exist: false,
-									main: "#ff0000"
+									main: "#000000"
 									},
 								stroke: {
 									width: 0, // 0-35
-									color: "#ffffff"
+									color: "#000000"
 									},
 								outline: {
 									width: 0, // 0-35
@@ -141,7 +141,7 @@
 									},
 								shadow: {
 									blur: 0, // 0-15
-									color: "#ff0000",
+									color: "#000000",
 									posX: 0, // -350-350
 									posY: 0 // -350-350
 									},
