@@ -188,5 +188,5 @@ const print = JSON.parse(`{
 let product = JSON.parse(`{
 	"64b7dee69d312622a381aa03":{"name": "White Tshirt","type":"tshirt","size":"medium","print":0,"color":"white","image":["https://i.ibb.co/r79xnLd/53a5e7ae2d41.webp","https://i.ibb.co/k8dd8v6/28c6445b6cab.webp"],"keyword":"plain polos","quantity":1},
 	"64b7edd39d312622a381b034":{"name":"Orange Tshirt","type":"tshirt","size":"medium","print":0,"color":"neon-orange","image":["https://i.ibb.co/ZTQS5nD/5e4881bed2d3.webp","https://i.ibb.co/0Xj01hb/ae0c563d139c.webp"],"keyword":"plain polos","quantity":1},
-	"64bbba35b89b1e2299c271c8":{"name":"Tshirt cute monster","type":"tshirt","size":"medium","print":94253.88785046729,"color":"mint","image":["https://i.ibb.co/nmwkmwG/a00045a63f3a.webp","https://i.ibb.co/xY4MC6B/c3429f54e09a.webp"],"keyword":"Mint monster cute lucu","quantity":1},
+	"64bbba35b89b1e2299c271c8":{"name":"Tshirt cute monster","type":"tshirt","size":"medium","print":94253.88785046729,"color":"mint","image":["https://i.ibb.co/nmwkmwG/a00045a63f3a.webp","https://i.ibb.co/xY4MC6B/c3429f54e09a.webp"],"keyword":"Mint monster cute lucu","quantity":1}
 	}`);
