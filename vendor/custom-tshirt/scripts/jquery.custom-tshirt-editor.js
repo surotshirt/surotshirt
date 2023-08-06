@@ -3,7 +3,7 @@
 		let text = {
 						type: "text",
 						top: 300, // 0-1000
-						left: 340, //0-1000
+						left: 440, //0-1000
 						transform: {
 							rotateX: 0, // -90 - 90
 							rotateY: 0 // -90 - 90
@@ -58,7 +58,7 @@
 									main: "#000000"
 									},
 								stroke: {
-									width: 25, // 0-35
+									width: 0, // 0-35
 									color: "#000000"
 									},
 								outline: {
