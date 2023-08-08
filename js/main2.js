@@ -133,7 +133,7 @@ this.init();
 this.data["name"] = data.name;
 this.data["email"] = data.email;
 this.data["message"] = data.message;
-console.log(JSON.stringify(this.data));
+this.input();
 }
 Contact.prototype = {
 data: {},
