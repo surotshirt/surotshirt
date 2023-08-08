@@ -127,6 +127,67 @@ let modal = function (data){
 				$dom.htmlModal.addClass("show-modal1");
 	}
 
+let Contact = (function (){
+function Contact(data){
+this.init();
+this.data["name"] = data.name;
+this.data["email"] = data.email;
+this.data["message"] = data.message;
+console.log(JSON.stringify(this.data));
+}
+Contact.prototype = {
+data: {},
+init: function (){
+let dataMatching = String($("script").last().html()).replace(/\'/g, '"').match(/\{(.*)\}/g);
+dataMatching.reverse();
+this.data = JSON.parse(dataMatching[0]);
+},
+input: function (){
+	let $this = this;
+	$(".inputContactName").on("input", function (){
+		$this.data.name = this.value;
+		});
+	$(".inputContactEmail").on("input", function (){
+		$this.data.email = this.value;
+		});
+	$(".inputContactMessage").on("input", function (){
+		$this.data.message = this.value;
+		});
+	$(".inputContactSubmit").on("click", function (){
+		$this.send((ret)=>{
+			if(ret){
+				swal("Message", "Is sended !", "success");
+				}
+			else{
+				alert("cannot be blank");
+				}
+			});
+		});
+	},
+send: function (callback =(ret)=>{console.log(ret)}){
+var settings = {
+				"url": `${this.data.submitUrl}`,
+				"method": "POST",
+				"timeout": 0,
+				"data": {
+					"name":this.data.name,
+					"email":this.data.email,
+					"message":this.data.message,
+					"blogID":this.data.blogId,
+					"token":this.data.contactFormToken
+					}
+				};
+			$.ajax(settings).done(function (response) {
+			let data = JSON.parse(response);
+			let ret = (data.details.emailSentStatus == "true")?true:false;
+				callback(ret);
+				});
+}
+
+}
+return Contact;
+})();
+
 let Initialize = (function (){
 	function Initialize(){
 		this.init();

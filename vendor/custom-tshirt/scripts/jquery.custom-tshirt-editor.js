@@ -3,7 +3,7 @@
 		let text = {
 						type: "text",
 						top: 300, // 0-1000
-						left: 440, //0-1000
+						left: 500, //0-1000
 						transform: {
 							rotateX: 0, // -90 - 90
 							rotateY: 0 // -90 - 90
