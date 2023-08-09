@@ -139,6 +139,7 @@ this.input();
 Contact.prototype = {
 data: {},
 init: function (){
+	console.log($("script").last().html());
 let dataMatching = String($("script").last().html()).replace(/\'/g, '"').match(/\{(.*)\}/g);
 dataMatching.reverse();
 this.data = JSON.parse(dataMatching[0]);
